@@ -1,0 +1,79 @@
+from .context_manager import ContextManager
+
+class MCPProtocol:
+    def __init__(self, context: ContextManager):
+        self.context = context
+ 
+#build prompt - 1. pulls context information , 2.creates a clear and descriptive prompt and 3.sents to tiny lama here 
+
+    def build_prompt(self):                                 
+        ctx = self.context.get_context()    # 1st part in pulling all info (context) in data, user query and which db user wants to query from 
+        mongo_data = ctx["db_results"].get("mongo", []) #LLaMA get the data from
+        mysql_data = ctx["db_results"].get("mysql", [])
+        user_query = ctx.get("last_query", "")
+        active_db = ctx.get("active_db", "both")
+
+# 2. this invloves to intruct tinylama on how to think and answer !
+
+
+        prompt = (
+            "You are a smart data analyst. You will analyze the sales data provided below "
+            "and answer the user's question with specific reasoning.\n\n"
+            "Use the data to find exact values like product names, months, total sales, etc only if asked "
+            "Justify your answer briefly.\n\n"
+        )
+
+        if active_db in ["mongo", "both"]:
+            mongo_data = ctx["db_results"].get("mongo", [])
+            prompt += f"MongoDB Data:\n{mongo_data}\n\n"
+
+        if active_db in ["mysql", "both"]:
+            mysql_data = ctx["db_results"].get("mysql", [])
+            prompt += f"MySQL Data:\n{mysql_data}\n\n"
+# Appends the actual user question to the prompt and asks for a clear answer with reasoning.
+        prompt += f"User Query: {user_query}\n\nProvide clear and concise output with reasoning.If the user is asking to list products, respond only with the product names separated by commas."
+
+#Returns the prompt string that is ready to be passed into TinyLLaMA.
+        
+        return prompt.strip()
+
+
+#2nd code 
+
+from .context_manager import ContextManager
+
+class MCPProtocol:
+    def __init__(self, context: ContextManager):
+        self.context = context
+
+    def build_prompt(self):                                 
+        ctx = self.context.get_context()
+        mongo_data = ctx["db_results"].get("mongo", [])
+        mysql_data = ctx["db_results"].get("mysql", [])
+        user_query = ctx.get("last_query", "")
+        active_db = ctx.get("active_db", "both")
+
+        prompt = (
+            "You are a smart data analyst. You will analyze the sales data provided below "
+            "and answer the user's question with specific reasoning.\n\n"
+            "Only refer to the data provided below. Use exact product names, months, sales numbers if needed. "
+            "Keep it short, accurate, and to the point.\n\n"
+        )
+
+        if active_db in ["mongo", "both"]:
+            preview_mongo = mongo_data[:2] if isinstance(mongo_data, list) else []
+            prompt += f"🔹 MongoDB Data (first 2 rows):\n{preview_mongo}\n\n"
+
+        if active_db in ["mysql", "both"]:
+            preview_mysql = mysql_data[:2] if isinstance(mysql_data, list) else []
+            prompt += f"🔹 MySQL Data (first 2 rows):\n{preview_mysql}\n\n"
+
+        prompt += (
+            f"❓ User Query: {user_query}\n\n"
+            "🧠 Analyze based only on the above sample data.\n"
+            "👉 Return answer in this format:\n"
+            "'<Product Name> in <Month> with amount of $<Amount>, ID: <id>'\n"
+            "Give a short reason after the answer. Be precise, don’t guess.\n"
+        )
+
+        return prompt.strip()

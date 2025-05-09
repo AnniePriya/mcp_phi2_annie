@@ -1,0 +1,83 @@
+#tk
+import tkinter as tk
+from tkinter import messagebox
+from mcp.context_manager import ContextManager
+from mcp.mcp_protocol import MCPProtocol
+from db_connectors.mongo_connector import get_mongo_data
+from db_connectors.mysql_connector import get_mysql_data
+from mcp.history_logger import log_history
+
+# Function to query Phi and display results
+def query_phi(prompt):
+    ollama_path = r"C:\\Users\\HP\\AppData\\Local\\Programs\\Ollama\\ollama.exe"
+  
+    process = subprocess.Popen(
+        [ollama_path, 'run', 'phi'],
+        stdin=subprocess.PIPE,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+        encoding='utf-8'  
+    )
+
+    stdout, stderr = process.communicate(prompt)
+    return stdout.strip()
+
+# Create the main window
+def create_ui():
+    root = tk.Tk()
+    root.title("MCP System UI")
+    root.geometry("600x400")
+
+    # Function to handle the query and display result
+    def handle_query():
+        user_query = query_entry.get()
+        if not user_query:
+            messagebox.showerror("Input Error", "Please enter a query")
+            return
+        
+        # Setup context
+        context = ContextManager()
+        mongo_data = get_mongo_data("sales1_db", "sales")
+        mysql_data = get_mysql_data("sales2")
+        
+        context.set_user_id("12345")
+        context.update_db_results("mongo", mongo_data)
+        context.update_db_results("mysql", mysql_data)
+        context.set_active_db("both")  # we can change this based on user input
+
+        context.update_last_query(user_query)
+        
+        # Use MCP Protocol to build prompt
+        mcp = MCPProtocol(context)
+        formatted_prompt = mcp.build_prompt()
+
+        # Get result from Phi
+        result = query_phi(formatted_prompt)
+        log_history("12345", user_query, result)
+
+        # Display result in label
+        result_label.config(text=f"Result: {result}")
+    
+    # Add a label for instructions
+    label = tk.Label(root, text="Enter your query below:")
+    label.pack(pady=10)
+
+    # Add a text entry field for the query
+    query_entry = tk.Entry(root, width=50)
+    query_entry.pack(pady=5)
+
+    # Button to submit the query
+    query_button = tk.Button(root, text="Submit Query", command=handle_query)
+    query_button.pack(pady=20)
+
+    # Label to display the result
+    result_label = tk.Label(root, text="Result will appear here", wraplength=550, justify="left")
+    result_label.pack(pady=10)
+
+    # Start the Tkinter main loop
+    root.mainloop()
+
+# Run the UI
+if __name__ == "__main__":
+    create_ui()

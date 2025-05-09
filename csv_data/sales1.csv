@@ -1,0 +1,44 @@
+date,transaction_id,item_id,product_name,product_description,product_category,quantity,original_price,discount,price,sales_amount,delivery_amount,total_amount
+2023-01-05,TX10001,ITM001,Wireless Earbuds,"Noise cancelling wireless earbuds with 20hr battery",Electronics,1,129.99,10.00,119.99,119.99,5.99,125.98
+2023-01-07,TX10002,ITM002,Stainless Steel Water Bottle,"750ml insulated stainless steel bottle",Home & Kitchen,2,24.99,5.00,19.99,39.98,4.99,44.97
+2023-01-08,TX10003,ITM003,Organic Cotton T-Shirt,"100% organic cotton crew neck t-shirt",Clothing,1,29.95,3.00,26.95,26.95,0.00,26.95
+2023-01-10,TX10004,ITM004,Bluetooth Speaker,"Portable waterproof speaker with 12hr playback",Electronics,1,89.99,15.00,74.99,74.99,6.99,81.98
+2023-01-12,TX10005,ITM005,Non-Stick Frying Pan,"10-inch ceramic non-stick frying pan",Home & Kitchen,1,39.95,7.00,32.95,32.95,0.00,32.95
+2023-01-15,TX10006,ITM006,Yoga Mat,"6mm thick eco-friendly yoga mat",Sports & Fitness,1,45.00,5.00,40.00,40.00,0.00,40.00
+2023-01-17,TX10007,ITM007,Smart Watch,"Fitness tracker with heart rate monitor",Electronics,1,199.99,25.00,174.99,174.99,8.99,183.98
+2023-01-19,TX10008,ITM008,Leather Wallet,"Genuine leather bifold wallet",Accessories,1,49.95,10.00,39.95,39.95,0.00,39.95
+2023-01-21,TX10009,ITM009,Electric Toothbrush,"Rechargeable toothbrush with 3 modes",Health & Beauty,1,79.95,12.00,67.95,67.95,4.99,72.94
+2023-01-23,TX10010,ITM010,Coffee Maker,"12-cup programmable coffee maker",Home & Kitchen,1,59.99,8.00,51.99,51.99,7.99,59.98
+2023-01-25,TX10011,ITM011,Running Shoes,"Lightweight running shoes with cushioning",Footwear,1,89.95,15.00,74.95,74.95,0.00,74.95
+2023-01-27,TX10012,ITM012,Backpack,"Water-resistant backpack with laptop compartment",Bags,1,69.99,10.00,59.99,59.99,0.00,59.99
+2023-01-29,TX10013,ITM013,Wireless Charger,"Qi-certified fast wireless charger",Electronics,2,29.99,5.00,24.99,49.98,3.99,53.97
+2023-01-31,TX10014,ITM014,Air Fryer,"5.8QT digital air fryer with 7 presets",Home & Kitchen,1,119.99,20.00,99.99,99.99,9.99,109.98
+2023-02-02,TX10015,ITM015,Desk Lamp,"Adjustable LED desk lamp with USB port",Home & Office,1,49.95,7.00,42.95,42.95,0.00,42.95
+2023-02-04,TX10016,ITM016,Protein Powder,"Whey protein isolate vanilla flavor",Health & Nutrition,1,34.99,5.00,29.99,29.99,4.99,34.98
+2023-02-06,TX10017,ITM017,Smartphone Case,"Shockproof case for iPhone 14",Mobile Accessories,1,19.99,3.00,16.99,16.99,0.00,16.99
+2023-02-08,TX10018,ITM018,Cookware Set,"10-piece non-stick cookware set",Home & Kitchen,1,149.99,30.00,119.99,119.99,12.99,132.98
+2023-02-10,TX10019,ITM019,Fitness Resistance Bands,"Set of 5 resistance bands with handles",Sports & Fitness,1,29.95,5.00,24.95,24.95,0.00,24.95
+2023-02-12,TX10020,ITM020,Beard Trimmer,"Cordless beard trimmer with 10 length settings",Health & Beauty,1,44.95,7.00,37.95,37.95,0.00,37.95
+2023-02-14,TX10021,ITM021,Wireless Keyboard,"Slim Bluetooth keyboard with numeric pad",Electronics,1,59.99,8.00,51.99,51.99,0.00,51.99
+2023-02-16,TX10022,ITM022,Memory Foam Pillow,"Orthopedic memory foam pillow",Home & Kitchen,1,39.95,5.00,34.95,34.95,0.00,34.95
+2023-02-18,TX10023,ITM023,Portable Blender,"USB rechargeable personal blender",Home & Kitchen,1,35.99,5.00,30.99,30.99,4.99,35.98
+2023-02-20,TX10024,ITM024,Gaming Mouse,"RGB gaming mouse with 6 buttons",Electronics,1,49.99,7.00,42.99,42.99,0.00,42.99
+2023-02-22,TX10025,ITM025,Insulated Lunch Box,"Stainless steel 3-compartment lunch box",Home & Kitchen,1,29.95,4.00,25.95,25.95,0.00,25.95
+2023-02-24,TX10026,ITM026,Acrylic Paint Set,"24-color acrylic paint set with brushes",Arts & Crafts,1,24.99,3.00,21.99,21.99,4.99,26.98
+2023-02-26,TX10027,ITM027,Resistance Loop Bands,"Set of 5 latex resistance bands",Sports & Fitness,1,19.99,2.00,17.99,17.99,0.00,17.99
+2023-02-28,TX10028,ITM028,Ceramic Plant Pot,"6-inch handmade ceramic plant pot",Home & Garden,2,14.99,2.00,12.99,25.98,5.99,31.97
+2023-03-02,TX10029,ITM029,Adjustable Dumbbells,"Pair of 10lb adjustable dumbbells",Sports & Fitness,1,89.95,15.00,74.95,74.95,9.99,84.94
+2023-03-04,TX10030,ITM030,Essential Oil Diffuser,"Ultrasonic aromatherapy diffuser",Health & Beauty,1,34.95,5.00,29.95,29.95,0.00,29.95
+2023-03-06,TX10031,ITM031,Graphic Novel,"Bestselling graphic novel volume 1",Books,1,19.99,2.00,17.99,17.99,0.00,17.99
+2023-03-08,TX10032,ITM032,Silk Pillowcase,"100% mulberry silk pillowcase",Home & Kitchen,1,39.95,7.00,32.95,32.95,0.00,32.95
+2023-03-10,TX10033,ITM033,Fitness Tracker,"Waterproof activity tracker with GPS",Electronics,1,79.99,12.00,67.99,67.99,5.99,73.98
+2023-03-12,TX10034,ITM034,Cast Iron Skillet,"10.25-inch pre-seasoned cast iron skillet",Home & Kitchen,1,29.99,4.00,25.99,25.99,0.00,25.99
+2023-03-14,TX10035,ITM035,Noise Cancelling Headphones,"Over-ear noise cancelling headphones",Electronics,1,179.99,25.00,154.99,154.99,8.99,163.98
+2023-03-16,TX10036,ITM036,French Press,"34oz stainless steel french press",Home & Kitchen,1,34.95,5.00,29.95,29.95,0.00,29.95
+2023-03-18,TX10037,ITM037,Yoga Block,"High density foam yoga block",Sports & Fitness,2,14.99,2.00,12.99,25.98,0.00,25.98
+2023-03-20,TX10038,ITM038,Digital Meat Thermometer,"Instant read digital thermometer",Home & Kitchen,1,19.99,3.00,16.99,16.99,0.00,16.99
+2023-03-22,TX10039,ITM039,Car Phone Mount,"Air vent magnetic phone mount",Automotive,1,15.99,2.00,13.99,13.99,0.00,13.99
+2023-03-24,TX10040,ITM040,Reusable Grocery Bags,"Set of 3 foldable shopping bags",Home & Kitchen,1,12.99,1.00,11.99,11.99,0.00,11.99
+2023-03-26,TX10041,ITM041,LED Strip Lights,"16.4ft color changing LED strips",Electronics,1,24.99,4.00,20.99,20.99,3.99,24.98
+2023-03-28,TX10042,ITM042,Acupressure Mat,"Foam acupressure mat with pillow",Health & Beauty,1,39.95,6.00,33.95,33.95,0.00,33.95
+2023-03-30,TX10043,ITM043,Vegetable Spiralizer,"5-blade vegetable spiral slicer",Home & Kitchen,1,19.99,3.00,16.99,16.99,0.00,16.99

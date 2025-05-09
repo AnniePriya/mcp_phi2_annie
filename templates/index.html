@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MCP Web Interface</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f8f8f8;
+            padding: 40px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            margin-top: 30px;
+        }
+        input[type="text"] {
+            width: 400px;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #aaa;
+            border-radius: 8px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #222;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        .response-box {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧠 Ask your MCP AI anything about the sales data</h1>
+
+    <form method="POST">
+        <input type="text" name="query" placeholder="Type your question..." required>
+        <button type="submit">Ask</button>
+    </form>
+
+    {% if response %}
+    <div class="response-box">
+        <h3>🤖 Phi says:</h3>
+        <p>{{ response }}</p>
+    </div>
+    {% endif %}
+</body>
+</html>

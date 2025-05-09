@@ -1,0 +1,6 @@
+pandas
+pymongo
+mysql-connector-python
+python-dotenv
+llama-cpp-python
+modelcontextprotocol
