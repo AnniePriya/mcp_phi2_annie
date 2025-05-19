@@ -1,9 +1,13 @@
+#app.py for phi 2 
+
 from flask import Flask, render_template, request
 from mcp.context_manager import ContextManager
 from mcp.mcp_protocol import MCPProtocol
 from db_connectors.mongo_connector import get_mongo_data
 from db_connectors.mysql_connector import get_mysql_data
+from utils.pdf_reader import extract_text_from_pdf
 import subprocess
+import os
 
 app = Flask(__name__)
 
@@ -44,6 +48,15 @@ def home():
             context.set_active_db("mongo")
         else:
             context.set_active_db("both")
+
+        # Handle PDF upload
+        if "pdf" in request.files:
+            pdf_file = request.files["pdf"]
+            if pdf_file:
+                pdf_path = os.path.join("pdf_data", pdf_file.filename)
+                pdf_file.save(pdf_path)  # Save uploaded PDF
+                pdf_text = extract_text_from_pdf(pdf_path)
+                context.update_db_results("pdf", pdf_text)
 
         # Build prompt & query phi
         mcp = MCPProtocol(context)

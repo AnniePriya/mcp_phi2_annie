@@ -1,0 +1,62 @@
+# main.py for Mistral Inference via Hugging Face API
+
+from db_connectors.mongo_connector import get_mongo_data
+from db_connectors.mysql_connector import get_mysql_data
+from mcp.context_manager import ContextManager
+from mcp.mcp_protocol import MCPProtocol
+from mcp.history_logger import log_history, view_history
+from utils.pdf_reader import extract_text_from_pdf
+from mistral_inference import query_mistral  # Importing the query function from the new mistral_inference.py
+
+import os
+
+if __name__ == "__main__":
+    print("\n   🖥️  FETCHING DATA FROM ALL SOURCES ...\n")
+
+    # Fetch MongoDB and MySQL data
+    mongo_data = get_mongo_data("sales1_db", "sales")
+    mysql_data = get_mysql_data("sales_data2")
+    print(" 🏳️  Mongo Data fetched.")
+    print(" 🏳️  MySQL Data fetched.")
+
+    # Load PDF data
+    pdf_path = "pdf_data/ug-mtn-2020-ar-00.PDF"  # Update with your actual PDF path
+    pdf_text = ""
+    if os.path.exists(pdf_path):
+        pdf_text = extract_text_from_pdf(pdf_path)
+        print(" 📁 PDF data loaded.")
+    else:
+        print("⚠️ PDF file not found.")
+
+    # Create context
+    context = ContextManager()
+    context.set_user_id("12345")
+    context.update_db_results("mongo", mongo_data)
+    context.update_db_results("mysql", mysql_data)
+    context.update_db_results("pdf", pdf_text)
+
+    # Ask the user a question
+    user_query = input("\n❓ Ask a question about the data: ")
+    context.update_last_query(user_query)
+
+    # Decide active DB
+    lowered = user_query.lower()
+    if "mysql" in lowered:
+        context.set_active_db("mysql")
+    elif "mongo" in lowered:
+        context.set_active_db("mongo")
+    elif "pdf" in lowered:
+        context.set_active_db("pdf")
+    else:
+        context.set_active_db("all")
+
+    # Build the final prompt from context
+    mcp = MCPProtocol(context)
+    prompt = mcp.build_prompt()
+
+    print("\n🧐 Querying Mistral via Hugging Face Inference API...\n")
+    result = query_mistral(prompt)  # 🔥 Now using the updated query_mistral function
+    print("\n🤖 Mistral says:\n", result)
+
+    # Save query and response to history
+    log_history("12345", user_query, result)

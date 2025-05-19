@@ -1,0 +1,120 @@
+#app.py_open_router
+
+from flask import Flask, render_template, request
+from dotenv import load_dotenv
+import os
+import requests
+from mcp.context_manager import ContextManager
+from mcp.mcp_protocol import MCPProtocol
+from db_connectors.mongo_connector import get_mongo_data
+from db_connectors.mysql_connector import get_mysql_data
+from mcp.history_logger import log_history, view_history
+from utils.pdf_reader import extract_text_from_pdf  # Import PDF extraction
+
+# Initialize Flask app
+app = Flask(__name__)
+
+# Load environment variables
+load_dotenv()
+OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY") or "your_openrouter_api_key_here"
+
+# Load MongoDB and MySQL data once when the server starts
+mongo_data = get_mongo_data("sales1_db", "sales")
+mysql_data = get_mysql_data("sales2")
+
+# Initialize context
+context = ContextManager()
+context.set_user_id("12345")
+context.update_db_results("mongo", mongo_data)
+context.update_db_results("mysql", mysql_data)
+
+# Function to query GPT-4.1-mini via OpenRouter
+def query_openrouter(prompt):
+    headers = {
+        "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+        "HTTP-Referer": "http://localhost",  # replace with your hosted URL if needed
+        "X-Title": "MCP-Data-Agent"
+    }
+
+    payload = {
+        "model": "openai/gpt-4.1-mini",
+        "max_tokens": 1024,  # Adjust token usage for free quota
+        "messages": [
+            {"role": "system", "content": "You are a helpful data analyst assistant."},
+            {"role": "user", "content": prompt}
+        ]
+    }
+
+    response = requests.post(
+        "https://openrouter.ai/api/v1/chat/completions",
+        headers=headers,
+        json=payload
+    )
+
+    try:
+        res_json = response.json()
+        if "choices" in res_json:
+            return res_json["choices"][0]["message"]["content"]
+        else:
+            print("❌ OpenRouter Response Error:", res_json)
+            return "Something went wrong. Check your API key, quota, or model name."
+    except Exception as e:
+        print("❌ Exception while parsing response:", e)
+        print("Response content:", response.text)
+        return "Failed to get response."
+
+# Home route
+@app.route("/", methods=["GET", "POST"])
+def home():
+    response = ""
+    if request.method == "POST":
+        user_query = request.form["query"]
+        context.update_last_query(user_query)
+
+        # Set active DB scope
+        lowered = user_query.lower()
+        if "mysql" in lowered:
+            context.set_active_db("mysql")
+        elif "mongo" in lowered:
+            context.set_active_db("mongo")
+        else:
+            context.set_active_db("both")
+
+        # Load PDF data if exists
+        pdf_text = ""
+        pdf_path = "pdf_data/ug-mtn-2020-ar-00.PDF"  # Adjust the path as needed
+        if os.path.exists(pdf_path):
+            pdf_text = extract_text_from_pdf(pdf_path)
+            print("📑 PDF Data loaded.")
+        else:
+            print("⚠️ PDF file not found.")
+
+        # Build the prompt with MongoDB, MySQL, and PDF data
+        formatted_prompt = f"""
+I am providing you with data from two databases and a PDF.
+
+🔹 MongoDB data:
+{mongo_data[:7]}  # Customize based on what you want to display
+
+🔹 MySQL data:
+{mysql_data[:7]}  # Customize this too
+
+🔹 PDF data:
+{pdf_text[:500]}  # Only show a portion of PDF data
+
+Now, based on this information, please answer the following question:
+
+❓ {user_query}
+"""
+
+        # Query OpenRouter (GPT-4.1-mini)
+        response = query_openrouter(formatted_prompt)
+
+        # Save to history
+        log_history("12345", user_query, response)
+
+    return render_template("index.html", response=response)
+
+# Run the app
+if __name__ == "__main__":
+    app.run(debug=True)

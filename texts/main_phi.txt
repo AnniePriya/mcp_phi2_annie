@@ -1,0 +1,79 @@
+#main.py for phi 2 
+
+from db_connectors.mongo_connector import get_mongo_data
+from db_connectors.mysql_connector import get_mysql_data
+from mcp.context_manager import ContextManager
+from mcp.mcp_protocol import MCPProtocol
+from mcp.history_logger import log_history, view_history
+from utils.pdf_reader import extract_text_from_pdf
+
+import pandas as pd
+import subprocess
+import os
+
+def query_phi(prompt):
+    ollama_path = r"C:\Users\HP\AppData\Local\Programs\Ollama\ollama.exe"
+    process = subprocess.Popen(
+        [ollama_path, 'run', 'phi',],
+        stdin=subprocess.PIPE,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+        encoding='utf-8'
+    )
+    stdout, stderr = process.communicate(prompt)
+    return stdout.strip()
+
+if __name__ == "__main__":
+    print("\n   🖥️  FETCHING DATA FROM ALL SOURCES ...\n")
+
+    # Fetch MongoDB and MySQL data
+    mongo_data = get_mongo_data("sales1_db", "sales")
+    mysql_data = get_mysql_data("sales_data2")
+    print(" 🏳️  Mongo Data fetched." )
+    print(" 🏳️  MySQL Data fetched." )
+
+    # Load PDF data
+    pdf_path = "pdf_data/ug-mtn-2020-ar-00.PDF"  
+    pdf_text = ""
+    if os.path.exists(pdf_path):
+        pdf_text = extract_text_from_pdf(pdf_path)
+        print(" 📑 PDF data loaded." )
+    else:
+        print("⚠️ PDF file not found.")
+
+    # Create context
+    context = ContextManager()
+    context.set_user_id("12345")
+    context.update_db_results("mongo", mongo_data)
+    context.update_db_results("mysql", mysql_data)
+    context.update_db_results("pdf", pdf_text)
+
+    # Ask the user a question
+
+    user_query = input("\n❓ Ask a question about the data: ")
+    context.update_last_query(user_query)
+
+    # Decide active DB 
+    lowered = user_query.lower()
+    if "mysql" in lowered:
+        context.set_active_db("mysql")
+    elif "mongo" in lowered:
+        context.set_active_db("mongo")
+    elif "pdf" in lowered:
+        context.set_active_db("pdf")
+    # elif any(word in lowered for word in ["compare", "match", "verify", "report" , "analyse" ]):
+        # context.set_active_db("all")
+    else:
+        context.set_active_db("all")
+
+    # Build the prompt
+    mcp = MCPProtocol(context)
+    prompt = mcp.build_prompt()
+
+    print("\n🧠 Querying Phi...\n")
+    result = query_phi(prompt)
+    print("\n🤖 Phi says:\n", result)
+
+    # Save query and response to history
+    log_history("12345", user_query, result)

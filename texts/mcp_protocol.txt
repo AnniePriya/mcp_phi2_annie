@@ -77,3 +77,57 @@ class MCPProtocol:
         )
 
         return prompt.strip()
+---------------------------------------------------------------
+updated  prompt build - also good 
+from .context_manager import ContextManager
+
+class MCPProtocol:
+    def __init__(self, context: ContextManager):
+        self.context = context
+
+    def build_prompt(self):
+        ctx = self.context.get_context()
+        mongo_data = ctx["db_results"].get("mongo", [])
+        mysql_data = ctx["db_results"].get("mysql", [])
+        user_query = ctx.get("last_query", "")
+        active_db = ctx.get("active_db", "both")
+        pdf_text = ctx.get("pdf_text", "")  # ✨ Add this key to context if PDF uploaded
+
+        # Format the prompt as one clear, rich message
+        prompt = f"""
+📊 You are a highly skilled data analyst AI. Use the data provided below to answer the user's query precisely.
+
+🗃️ Database Samples:
+"""
+
+        # Add preview data from MongoDB
+        if active_db in ["mongo", "both"] and isinstance(mongo_data, list):
+            sample = mongo_data[:5]
+            prompt += f"\n🔹 MongoDB Data (Top 5 rows):\n{sample}\n"
+
+        # Add preview data from MySQL
+        if active_db in ["mysql", "both"] and isinstance(mysql_data, list):
+            sample = mysql_data[:5]
+            prompt += f"\n🔹 MySQL Data (Top 5 rows):\n{sample}\n"
+
+        # Add extracted PDF content if present
+        if pdf_text:
+            prompt += f"\n📄 PDF Data Extracted:\n{pdf_text[:1000]}...\n"  # Limit to 1000 chars for clarity
+
+        # Add user query
+        prompt += f"""
+❓ User Query:
+{user_query}
+
+🔍 Instructions:
+- Use only the above data.
+- Refer to exact values like product names, months, and amounts.
+- Be precise, no guessing or hallucinating.
+- If needed, compare both sources logically.
+
+💬 Respond in this format if applicable:
+'<Product Name> in <Month> with amount of $<Amount>, ID: <id>'
+Give a short reasoning after your answer.
+"""
+
+        return prompt.strip()

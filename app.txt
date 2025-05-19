@@ -1,0 +1,54 @@
+# app.py
+import streamlit as st
+from db_connectors.mongo_connector import get_mongo_data
+from db_connectors.mysql_connector import get_mysql_data
+from utils.pdf_reader import extract_text_from_pdf
+from mcp.context_manager import ContextManager
+from mcp.mcp_protocol import MCPProtocol
+from mcp.history_logger import log_history, view_history
+from main import query_openrouter  
+
+# Load data on startup
+@st.cache_data
+def load_data():
+    mongo = get_mongo_data("sales1_db", "sales")
+    mysql = get_mysql_data("sales_data2")
+    pdf = extract_text_from_pdf("pdf_data/ug-mtn-2020-ar-00.PDF")
+    return mongo, mysql, pdf
+
+st.title("📊 MCP Personal Data Agent")
+
+# Sidebar settings
+active_db = "all"  
+st.sidebar.title("Settings")
+
+# Load data
+with st.spinner("Loading databases..."):
+    mongo_data, mysql_data, pdf_data = load_data()
+
+# User input
+user_query = st.text_input("💬 Enter your question:")
+
+if st.button("Ask"):
+    context = ContextManager()
+    context.set_user_id("12345")
+    context.set_active_db(active_db)
+    context.update_last_query(user_query)
+    context.update_db_results("mongo", mongo_data)
+    context.update_db_results("mysql", mysql_data)
+    context.update_db_results("pdf", pdf_data)
+
+    mcp = MCPProtocol(context)
+    final_prompt = mcp.build_prompt()
+
+    with st.spinner("Querying model via OpenRouter..."):
+        result = query_openrouter(final_prompt)
+
+    st.markdown("### 🤖 Answer")
+    st.success(result)
+
+    log_history("12345", user_query, result)
+
+# History viewer
+if st.sidebar.button("📜 View Past Queries"):
+    st.sidebar.write(view_history("12345"))

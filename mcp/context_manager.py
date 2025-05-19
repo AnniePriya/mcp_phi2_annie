@@ -1,14 +1,14 @@
-#context_manager.py:
 class ContextManager:
-    def __init__(self):  # it should be __init__, not init
+    def __init__(self):
         self.context = {
             "user_id": None,
             "last_query": None,
             "db_results": {
                 "mongo": [],
-                "mysql": []
+                "mysql": [],
+                "pdf": "" 
             },
-            "active_db": None
+            "active_db": "all"
         }
 
     def set_user_id(self, user_id):
@@ -22,7 +22,7 @@ class ContextManager:
             self.context["db_results"][db_name] = data
 
     def set_active_db(self, db_name):
-        if db_name in ["mongo", "mysql", "both"]:
+        if db_name in ["mongo", "mysql", "pdf", "all"]:
             self.context["active_db"] = db_name
 
     def get_context(self):

@@ -1,4 +1,4 @@
-#main.py_open router // -- deepseek 
+#main.py_open router //
 import os
 import requests
 from dotenv import load_dotenv
@@ -24,7 +24,7 @@ def query_openrouter(prompt):
     }
 
     payload = {
-        "model": "deepseek/deepseek-chat-v3-0324",
+        "model": "openai/gpt-4.1-mini",
         "max_tokens": 1024,  
         "messages": [
             {"role": "system", "content": "You are a helpful data analyst assistant."},
@@ -54,7 +54,7 @@ def query_openrouter(prompt):
 
 # MAIN PROGRAM
 if __name__ == "__main__":
-    print("\n  🖥️  FETCHING DATA FROM MONGODB,MYSQL and PDF ...")
+    print("\n🖥️ FETCHING DATA FROM MONGODB AND MYSQL...")
 
     # Fetch MongoDB data
     try:
@@ -66,7 +66,7 @@ if __name__ == "__main__":
 
     
     try:
-        mysql_data = get_mysql_data("sales_data2")
+        mysql_data = get_mysql_data("sales2")
         print("✅ MySQL Data fetched.")
     except Exception as e:
         print("⚠️ Failed to fetch MySQL data:", e)
@@ -103,7 +103,7 @@ Now based on this information, please answer the following question:
 ❓ {user_query}
 """
 
-    print("\n⏳ Querying DeepSeek: DeepSeek V3 0324 via OpenRouter...\n")
+    print("\n⏳ Querying GPT-4.1-mini via OpenRouter...\n")
     result = query_openrouter(formatted_prompt)
 
     print("🤖 Response:\n", result)
