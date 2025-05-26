@@ -13,7 +13,7 @@ from utils.pdf_reader import extract_text_from_pdf
 load_dotenv()
 
 
-OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY") or "your_openrouter_api_key_here"
+OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY") 
 
 # via opren router connect
 def query_openrouter(prompt):
@@ -90,10 +90,10 @@ if __name__ == "__main__":
 I am providing you with two sets of data from two databases and a pdf.
 
 🔹 MongoDB data:
-{mongo_data[:7]}  
+{mongo_data[:10]}  
 
 🔹 MySQL data:
-{mysql_data[:7]}  
+{mysql_data[:10]}  
 
 🔹 PDF data:
 {pdf_text}  

@@ -1,91 +1,39 @@
-date,transaction_id,item_id,product_name,quantity,original_price,discount,price,sales_amount,delivery_amount,total_amount,region
-2025-01-01,T10001,I5432,Premium Headphones,2,89.99,10.00,79.99,159.98,7.50,167.48,East
-2025-01-02,T10002,I8765,Wireless Mouse,1,29.99,0.00,29.99,29.99,5.00,34.99,West
-2025-01-03,T10003,I2345,Smart Watch,1,199.99,30.00,169.99,169.99,0.00,169.99,North
-2025-01-04,T10004,I9876,Bluetooth Speaker,3,49.99,5.00,44.99,134.97,8.25,143.22,South
-2025-01-05,T10005,I7654,USB-C Cable Pack,4,12.99,2.00,10.99,43.96,4.50,48.46,East
-2025-01-06,T10006,I3456,Gaming Mouse,2,59.99,7.50,52.49,104.98,6.75,111.73,West
-2025-01-07,T10007,I8901,Laptop Stand,1,34.99,0.00,34.99,34.99,5.50,40.49,North
-2025-01-08,T10008,I5678,Webcam HD,1,79.99,15.00,64.99,64.99,0.00,64.99,South
-2025-01-09,T10009,I2109,Mechanical Keyboard,1,129.99,20.00,109.99,109.99,9.00,118.99,East
-2025-01-10,T10010,I7890,External SSD 1TB,1,149.99,25.00,124.99,124.99,0.00,124.99,West
-2025-01-11,T10011,I4567,Wireless Earbuds,2,69.99,10.00,59.99,119.98,6.50,126.48,North
-2025-01-12,T10012,I8907,Phone Case,3,19.99,2.50,17.49,52.47,4.25,56.72,South
-2025-01-13,T10013,I3210,Power Bank 20000mAh,1,49.99,5.00,44.99,44.99,5.75,50.74,East
-2025-01-14,T10014,I6543,HDMI Cable,2,14.99,0.00,14.99,29.98,4.00,33.98,West
-2025-01-15,T10015,I9012,Wireless Charger,1,29.99,3.00,26.99,26.99,5.25,32.24,North
-2025-01-16,T10016,I5678,Webcam HD,2,79.99,12.00,67.99,135.98,0.00,135.98,South
-2025-01-17,T10017,I2345,Smart Watch,1,199.99,40.00,159.99,159.99,8.50,168.49,East
-2025-01-18,T10018,I7654,USB-C Cable Pack,5,12.99,1.50,11.49,57.45,4.75,62.20,West
-2025-01-19,T10019,I4321,Fitness Tracker,1,89.99,15.00,74.99,74.99,0.00,74.99,North
-2025-01-20,T10020,I8765,Wireless Mouse,3,29.99,3.00,26.99,80.97,6.25,87.22,South
-2025-01-21,T10021,I1234,Tablet Cover,2,24.99,2.50,22.49,44.98,5.00,49.98,East
-2025-01-22,T10022,I5678,Webcam HD,1,79.99,0.00,79.99,79.99,0.00,79.99,West
-2025-01-23,T10023,I9876,Bluetooth Speaker,2,49.99,7.50,42.49,84.98,7.25,92.23,North
-2025-01-24,T10024,I6789,Screen Protector,4,9.99,1.00,8.99,35.96,4.25,40.21,South
-2025-01-25,T10025,I3456,Gaming Mouse,1,59.99,6.00,53.99,53.99,5.50,59.49,East
-2025-01-26,T10026,I7890,External SSD 1TB,1,149.99,30.00,119.99,119.99,0.00,119.99,West
-2025-01-27,T10027,I2109,Mechanical Keyboard,2,129.99,25.00,104.99,209.98,9.75,219.73,North
-2025-01-28,T10028,I5432,Premium Headphones,1,89.99,0.00,89.99,89.99,7.00,96.99,South
-2025-01-29,T10029,I8901,Laptop Stand,3,34.99,5.00,29.99,89.97,6.50,96.47,East
-2025-01-30,T10030,I4567,Wireless Earbuds,1,69.99,7.00,62.99,62.99,5.25,68.24,West
-2025-01-31,T10031,I7654,USB-C Cable Pack,6,12.99,2.00,10.99,65.94,4.50,70.44,North
-2025-02-01,T10032,I9012,Wireless Charger,2,29.99,5.00,24.99,49.98,5.75,55.73,South
-2025-02-02,T10033,I3210,Power Bank 20000mAh,1,49.99,0.00,49.99,49.99,0.00,49.99,East
-2025-02-03,T10034,I6543,HDMI Cable,3,14.99,1.50,13.49,40.47,4.75,45.22,West
-2025-02-04,T10035,I1234,Tablet Cover,2,24.99,3.00,21.99,43.98,5.25,49.23,North
-2025-02-05,T10036,I8907,Phone Case,4,19.99,2.00,17.99,71.96,6.00,77.96,South
-2025-02-06,T10037,I5432,Premium Headphones,1,89.99,15.00,74.99,74.99,7.25,82.24,East
-2025-02-07,T10038,I2345,Smart Watch,1,199.99,20.00,179.99,179.99,0.00,179.99,West
-2025-02-08,T10039,I9876,Bluetooth Speaker,2,49.99,5.00,44.99,89.98,7.50,97.48,North
-2025-02-09,T10040,I4321,Fitness Tracker,1,89.99,10.00,79.99,79.99,6.25,86.24,South
-2025-02-10,T10041,I7890,External SSD 1TB,1,149.99,15.00,134.99,134.99,0.00,134.99,East
-2025-02-11,T10042,I8765,Wireless Mouse,3,29.99,3.00,26.99,80.97,5.50,86.47,West
-2025-02-12,T10043,I2109,Mechanical Keyboard,1,129.99,25.00,104.99,104.99,8.75,113.74,North
-2025-02-13,T10044,I5678,Webcam HD,2,79.99,8.00,71.99,143.98,0.00,143.98,South
-2025-02-14,T10045,I8901,Laptop Stand,1,34.99,0.00,34.99,34.99,5.25,40.24,East
-2025-02-15,T10046,I3456,Gaming Mouse,2,59.99,12.00,47.99,95.98,6.50,102.48,West
-2025-02-16,T10047,I7654,USB-C Cable Pack,5,12.99,1.00,11.99,59.95,4.25,64.20,North
-2025-02-17,T10048,I4567,Wireless Earbuds,1,69.99,7.00,62.99,62.99,5.75,68.74,South
-2025-02-18,T10049,I9012,Wireless Charger,3,29.99,4.50,25.49,76.47,6.00,82.47,East
-2025-02-19,T10050,I6789,Screen Protector,6,9.99,1.00,8.99,53.94,4.50,58.44,West
-2025-02-20,T10051,I3210,Power Bank 20000mAh,1,49.99,5.00,44.99,44.99,5.50,50.49,North
-2025-02-21,T10052,I6543,HDMI Cable,2,14.99,0.00,14.99,29.98,4.75,34.73,South
-2025-02-22,T10053,I1234,Tablet Cover,3,24.99,3.75,21.24,63.72,5.50,69.22,East
-2025-02-23,T10054,I8907,Phone Case,2,19.99,2.50,17.49,34.98,4.25,39.23,West
-2025-02-24,T10055,I5432,Premium Headphones,1,89.99,9.00,80.99,80.99,7.50,88.49,North
-2025-02-25,T10056,I7890,External SSD 1TB,1,149.99,20.00,129.99,129.99,0.00,129.99,South
-2025-02-26,T10057,I2345,Smart Watch,1,199.99,30.00,169.99,169.99,9.25,179.24,East
-2025-02-27,T10058,I9876,Bluetooth Speaker,2,49.99,7.50,42.49,84.98,7.00,91.98,West
-2025-02-28,T10059,I4321,Fitness Tracker,1,89.99,0.00,89.99,89.99,6.75,96.74,North
-2025-03-01,T10060,I5678,Webcam HD,1,79.99,10.00,69.99,69.99,0.00,69.99,South
-2025-03-02,T10061,I8765,Wireless Mouse,4,29.99,4.00,25.99,103.96,6.25,110.21,East
-2025-03-03,T10062,I2109,Mechanical Keyboard,1,129.99,15.00,114.99,114.99,9.50,124.49,West
-2025-03-04,T10063,I7654,USB-C Cable Pack,3,12.99,1.50,11.49,34.47,4.00,38.47,North
-2025-03-05,T10064,I8901,Laptop Stand,2,34.99,3.50,31.49,62.98,5.75,68.73,South
-2025-03-06,T10065,I3456,Gaming Mouse,1,59.99,0.00,59.99,59.99,6.00,65.99,East
-2025-03-07,T10066,I4567,Wireless Earbuds,2,69.99,14.00,55.99,111.98,5.50,117.48,West
-2025-03-08,T10067,I9012,Wireless Charger,1,29.99,3.00,26.99,26.99,5.25,32.24,North
-2025-03-09,T10068,I6789,Screen Protector,5,9.99,0.50,9.49,47.45,4.50,51.95,South
-2025-03-10,T10069,I3210,Power Bank 20000mAh,2,49.99,10.00,39.99,79.98,6.25,86.23,East
-2025-03-11,T10070,I6543,HDMI Cable,4,14.99,2.00,12.99,51.96,4.75,56.71,West
-2025-03-12,T10071,I5432,Premium Headphones,1,89.99,0.00,89.99,89.99,7.50,97.49,North
-2025-03-13,T10072,I1234,Tablet Cover,3,24.99,2.50,22.49,67.47,5.25,72.72,South
-2025-03-14,T10073,I8907,Phone Case,2,19.99,4.00,15.99,31.98,4.00,35.98,East
-2025-03-15,T10074,I2345,Smart Watch,1,199.99,40.00,159.99,159.99,0.00,159.99,West
-2025-03-16,T10075,I7890,External SSD 1TB,1,149.99,15.00,134.99,134.99,8.75,143.74,North
-2025-03-17,T10076,I9876,Bluetooth Speaker,2,49.99,0.00,49.99,99.98,7.25,107.23,South
-2025-03-18,T10077,I4321,Fitness Tracker,1,89.99,9.00,80.99,80.99,6.50,87.49,East
-2025-03-19,T10078,I8765,Wireless Mouse,2,29.99,3.00,26.99,53.98,5.00,58.98,West
-2025-03-20,T10079,I5678,Webcam HD,1,79.99,12.00,67.99,67.99,0.00,67.99,North
-2025-03-21,T10080,I2109,Mechanical Keyboard,1,129.99,20.00,109.99,109.99,9.25,119.24,South
-2025-03-22,T10081,I7654,USB-C Cable Pack,4,12.99,1.30,11.69,46.76,4.25,51.01,East
-2025-03-23,T10082,I8901,Laptop Stand,1,34.99,5.00,29.99,29.99,5.50,35.49,West
-2025-03-24,T10083,I3456,Gaming Mouse,2,59.99,9.00,50.99,101.98,6.75,108.73,North
-2025-03-25,T10084,I4567,Wireless Earbuds,1,69.99,0.00,69.99,69.99,5.25,75.24,South
-2025-03-26,T10085,I9012,Wireless Charger,3,29.99,4.50,25.49,76.47,5.75,82.22,East
-2025-03-27,T10086,I6789,Screen Protector,6,9.99,1.00,8.99,53.94,4.50,58.44,West
-2025-03-28,T10087,I3210,Power Bank 20000mAh,1,49.99,7.50,42.49,42.49,5.75,48.24,North
-2025-03-29,T10088,I6543,HDMI Cable,3,14.99,1.50,13.49,40.47,4.25,44.72,South
-2025-03-30,T10089,I5432,Premium Headphones,1,89.99,18.00,71.99,71.99,7.50,79.49,East
-2025-03-31,T10090,I1234,Tablet Cover,2,24.99,0.00,24.99,49.98,5.00,54.98,West
+MTN Uganda Financial Summary 2020 vs 2019,,,
+Section,Item,2020,2019 Restated 
+Income Statement,Revenue from contracts with customers,"1,43,42,74,178","1,32,29,17,862"
+Income Statement,Direct network operating costs,"-23,57,68,353","-22,01,93,638"
+Income Statement,Government & regulatory costs,"-4,61,37,324","-4,36,45,565"
+Income Statement,Cost of handsets & accessories sold,"-1,55,81,686","-2,24,88,189"
+Income Statement,Interconnect & roaming,"-7,23,18,584","-7,57,96,706"
+Income Statement,Employee benefits,"-9,89,74,252","-10,09,22,374"
+Income Statement,"Selling, distribution & marketing expenses","-10,82,17,030","-12,09,63,439"
+Income Statement,Decrease in impairment of receivables,"84,31,783","27,87,801"
+Income Statement,Other operating expenses,"-14,50,47,959","-9,63,62,572"
+Income Statement,Depreciation & impairment,"-24,99,02,429","-24,46,31,577"
+Income Statement,Amortisation of intangibles,"-8,05,64,364","-5,70,34,006"
+Income Statement,Operating Profit,"39,01,93,980","34,36,67,597"
+Income Statement,Finance income,"1,72,34,151","63,96,782"
+Income Statement,Finance costs,"-15,57,97,780","-13,39,25,336"
+Income Statement,Profit Before Tax,"25,16,30,351","21,61,39,043"
+Income Statement,Income tax expense,"-7,60,72,178","-6,12,08,312"
+Income Statement,Net Profit (Continuing Ops),"17,55,58,173","15,49,30,731"
+Income Statement,Discontinued Revenue,"44,35,25,030","39,46,56,420"
+Income Statement,Discontinued Expenses,"-23,47,76,488","-23,13,43,109"
+Income Statement,Net Profit (Discontinued Ops),"14,61,23,980","11,43,19,317"
+Income Statement,Total Net Profit,"32,16,82,153","26,92,50,048"
+Income Statement,Basic EPS (Continuing Ops),"46,641","41,161"
+Income Statement,Basic EPS (Total),"85,463","71,533"
+ Balance Sheet,Ordinary Share Capital,"3,764","3,764"
+ Balance Sheet,Retained Earnings,"72,59,50,972","55,72,75,419"
+ Balance Sheet,Total Equity,"72,59,54,736","55,72,79,183"
+ Cash Flow Statement,Net cash from operating activities,"43,29,49,651","42,98,46,319"
+ Cash Flow Statement,Net cash used in investing activities,"-61,20,74,750","-24,77,88,889"
+ Cash Flow Statement,Net cash from financing activities,"13,30,28,517","-16,02,37,423"
+ Cash Flow Statement,Net change in cash,"-4,60,96,582","2,18,20,007"
+ Cash Flow Statement,Cash at beginning of year,"10,93,87,902","9,25,57,733"
+ Cash Flow Statement,Exchange losses,"-41,20,795","-49,89,838"
+ Cash Flow Statement,Cash at end of year,"5,91,70,525","10,93,87,902"
+Changes in Equity,Opening Retained Earnings,"55,72,75,419","44,23,49,371"
+Changes in Equity,Profit for the Year,"32,16,82,153","26,92,50,048"
+Changes in Equity,Dividends Declared,"-15,30,06,600","-15,43,24,000"
+Changes in Equity,Closing Retained Earnings,"72,59,50,972","55,72,75,419"
