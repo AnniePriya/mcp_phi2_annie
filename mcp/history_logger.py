@@ -24,19 +24,20 @@ def log_history(user_id, query, response, filepath="mcp/history_log.json"):
     with open(filepath, "w", encoding="utf-8") as f:
         json.dump(history, f, indent=2)
 
+#view histroy  loads all the things
 
 def view_history(user_id=None):
     if not os.path.exists(HISTORY_FILE):
-        print("No history found.")
-        return
+        return []
 
     with open(HISTORY_FILE, "r", encoding="utf-8") as f:
-        history = json.load(f)
+        try:
+            history = json.load(f)
+        except json.JSONDecodeError:
+            return []
 
-    print("\n📜 History Log:\n")
-    for entry in history:
-        if user_id and entry["user_id"] != user_id:
-            continue
-        print(f"🕒 {entry['timestamp']}")
-        print(f"❓ Q: {entry['query']}")
-        print(f"🤖 A: {entry['response']}\n")
+    # Return only relevant entries
+    if user_id:
+        return [entry for entry in history if entry["user_id"] == user_id]
+    return history
+
